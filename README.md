@@ -66,7 +66,9 @@ Web Server started at <http://192.168.68.50:58767/>.
        3. test_evaluation.py: Contains a test class (TestEvaluation) with test methods for testing functionality and validation related to the evaluation process from three sides (HR, Manager, Employee, Direct Manager/Supervisor).
     
    * Conftest file: contain a pytest fixture, named driver  used to initialize a Selenium WebDriver instance before each test function and quits the WebDriver instance after the test function has finished running.
+   * locators file: it contains definitions of locators used to identify web elements in automated tests, EvaluationLocators, LoginPageLocators,and HomePageLocators.
 
+     
 ## Test Data:
 
 * testdata.py:  contain LoginTestData, and ProbEvaluationData were test Data generated manually.
