@@ -37,7 +37,7 @@ Generating report to temp directory
 ```
  allure serve .\reportallure\                                    
 ```
-Web Server started at <http://192.168.68.50:58767/index.html/>.
+Web Server started at <http://192.168.68.50:58767/>.
             
    
 ## Details:
