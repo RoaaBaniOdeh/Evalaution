@@ -20,3 +20,10 @@ class EvaluationLocators:
     CREATE_EVALUATION_BTN = (By.CLASS_NAME, "btn-primary")
     EVALUATIONS_TABLE = (By.CSS_SELECTOR, 'tbody')
     FIRST_ROW_OF_EVALUATION_TABLE = (By.CSS_SELECTOR, 'tbody tr:first-child')
+    Answer4_ID = (By.ID, "answer-4")
+    Answer2_ID = (By.ID, "answer-3")
+    Answer1_ID = (By.ID, "answer-1")
+    manageEvalTable_Selector = (By.ID, "manageEvalTable")
+    manageEvalTable_Selector_row = (By.CSS_SELECTOR, "#manageEvalTable tbody tr")
+    ANSWERS_SECTION = (By.CLASS_NAME, "well")
+

@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+
+from locators import EvaluationLocators
 from pages.base import BasePage
 from selenium.webdriver.support.ui import Select
 import random
@@ -8,35 +10,15 @@ from selenium.common.exceptions import TimeoutException
 
 
 class Evaluation(BasePage):
-    ID_MENU_NAME = (By.ID, "name")
-    CREATE_EVALUATION_BTN = (By.CLASS_NAME, "btn-primary")
-    EVALUATIONS_TABLE = (By.CSS_SELECTOR, 'tbody')
-    FIRST_ROW_OF_EVALUATION_TABLE = (By.CSS_SELECTOR, 'tbody tr:first-child')
-    # emp_name = EvaluationLocators.ID_MENU_NAME
-    manageEvalTable_Selector = (By.ID, "manageEvalTable")
-    manageEvalTable_Selector_row = (By.CSS_SELECTOR, "#manageEvalTable tbody tr")
-    ANSWERS_SECTION = (By.CLASS_NAME, "well")
-    CHECK_BOXES = (By.CSS_SELECTOR, "input[type='checkbox']")
-    Answer4_ID = (By.ID, "answer-4")
-    Answer2_ID = (By.ID, "answer-3")
-    Answer1_ID = (By.ID, "answer-1")
-
-    '''
-
-    ROWS_OF_TABLE = (By.CSS_SELECTOR, "tbody tr")
-    VIEW_BTN = (By.CSS_SELECTOR, "button.btn-info")
-    save_draft_button_locator = (By.XPATH, "//button[contains(., 'Save Draft')]")
-    submit_form_button_locator = (By.XPATH, "//button[contains(., 'Submit Form')]")
-    '''
 
     def choose_employee_and_create_evaluation(self, employee_name):
-        dropdown = self.find(*self.ID_MENU_NAME)
+        dropdown = self.find(*EvaluationLocators.ID_MENU_NAME)
         select = Select(dropdown)
         select.select_by_visible_text(employee_name)
-        self.find(*self.CREATE_EVALUATION_BTN).click()
+        self.find(*EvaluationLocators.CREATE_EVALUATION_BTN).click()
 
     def check_evaluation_status(self, evaluation_status, employee_name):
-        first_row = self.wait_for(self.EVALUATIONS_TABLE).find_element(*self.FIRST_ROW_OF_EVALUATION_TABLE)
+        first_row = self.wait_for(EvaluationLocators.EVALUATIONS_TABLE).find_element(*EvaluationLocators.FIRST_ROW_OF_EVALUATION_TABLE)
         cells = first_row.find_elements(By.TAG_NAME, 'td')
         cell_texts = [cell.text.strip() for cell in cells]
         if evaluation_status in cell_texts and employee_name in cell_texts:
@@ -45,8 +27,8 @@ class Evaluation(BasePage):
             return False
 
     def view_evaluation(self, employee_name, evaluation_status):
-        self.wait_for_visible(self.manageEvalTable_Selector)
-        rows = self.wait_for_elements(self.manageEvalTable_Selector_row)
+        self.wait_for_visible(EvaluationLocators.manageEvalTable_Selector)
+        rows = self.wait_for_elements(EvaluationLocators.manageEvalTable_Selector_row)
         for row in rows:
             columns = row.find_elements(By.TAG_NAME, 'td')
             if columns[0].text.strip() == employee_name and columns[3].text.strip() == evaluation_status:
@@ -69,11 +51,11 @@ class Evaluation(BasePage):
                 for choice in choices:
                     checkboxes[choice].click()
 
-        section = self.wait_for_visible(self.ANSWERS_SECTION)
+        section = self.wait_for_visible(EvaluationLocators.ANSWERS_SECTION)
         textareas = [
-            section.find_element(*self.Answer1_ID),
-            section.find_element(*self.Answer2_ID),
-            section.find_element(*self.Answer4_ID)
+            section.find_element(*EvaluationLocators.Answer1_ID),
+            section.find_element(*EvaluationLocators.Answer2_ID),
+            section.find_element(*EvaluationLocators.Answer4_ID)
         ]
         textarea_indices = [0, 1, 2]
         counter = 0
