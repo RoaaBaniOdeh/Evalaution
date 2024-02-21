@@ -1,13 +1,9 @@
 from selenium.webdriver.common.by import By
 from pages.base import BasePage
 from selenium.webdriver.support.ui import Select
-import pytest
 import random
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import TimeoutException
-
-
-
 # from locators import EvaluationLocators
 
 
@@ -106,3 +102,21 @@ class Evaluation(BasePage):
         except TimeoutException:
             print("Timeout occurred while waiting for the footer or button to be visible.")
             return False
+
+    def manager_choice(self):
+        section_element = self.find(*(By.XPATH, "//section[h2[contains(., 'Project/ Department Head’s Decision')]]"))
+        radio_buttons = section_element.find_elements(By.CSS_SELECTOR, "label.block input[type='radio']")
+        if not radio_buttons:
+            print("No radio buttons found within the section element.")
+        else:
+            random_radio_button = random.choice(radio_buttons)
+            random_radio_button.click()
+            print("filled.")
+
+    def employee_ack(self):
+        self.wait_for_visible((By.CSS_SELECTOR, "footer.mb-5"))
+        checkbox = self.wait_for_clickable((By.ID, "ack-box"))
+        checkbox.click()
+        acknowledge_button = self.wait_for_clickable((By.CSS_SELECTOR, "button.btn-primary"))
+        acknowledge_button.click()
+
