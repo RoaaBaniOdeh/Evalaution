@@ -27,7 +27,7 @@ If you want to run a specific file
 pytest tests/fileName.py
 ```
 ## To open allure results
-Allure is a open source framework for reporting the test runs. To install allure in mac, use the following steps
+Allure is a open source framework for reporting the test runs.
 
 run tests with the  ``--alluredir``  option to specify the directory where Allure should store its report data: 
 ```
